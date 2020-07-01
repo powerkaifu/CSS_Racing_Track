@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
+      <style>
+         * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+            box-sizing: border-box;
+            transition: 1s;
+         }
+
+         :root {
+            --track_size: 20vmax;
+            --track_distance: calc(var(--track_size) * 0.11333333333333333);
+            --track_border: calc(var(--track_size) * 0.23333333333333334);
+            --car_size_width: calc(var(--track_size) * 0.13333333333333333);
+            --car_size_height: calc(var(--track_size) / 2);
+            --car_margin_left: calc(var(--track_size) * 0.06666666666666667);
+            --druation_time: 3s;
+            --delay_time: calc(var(--druation_time) / 2);
+            --drop-shadow: calc(var(--track_size) * 0.014285714285714285);
+         }
+         body,
+         html {
+            height: 100%;
+         }
+         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: url('racing_track.jpg') no-repeat center/cover;
+         }
+         #infinite {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(90deg);
+            filter: drop-shadow(0 0 var(--drop-shadow) rgba(255, 255, 255, 1))
+               drop-shadow(0 0 calc(var(--drop-shadow) * 2) rgba(255, 255, 0, 0.8))
+               drop-shadow(0 0 calc(var(--drop-shadow) * 3) rgba(255, 17, 0, 1));
+
+            position: relative;
+         }
+
+         #infinite::after {
+            content: '';
+            width: 0.5vmax;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(white 0%, transparent 100%);
+            filter: blur(1vmax);
+            opacity: 0.2;
+            position: absolute;
+            right: -100px;
+            top: 0%;
+            right: -10vmax;
+         }
+
+         #infinite .track {
+            width: var(--track_size);
+            height: var(--track_size);
+            border-radius: 50%;
+         }
+
+         #infinite .track-wrap {
+            position: relative;
+            left: 0;
+            animation: float_it 5s infinite alternate;
+         }
+
+         #infinite .track::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: var(--track_border) solid rgba(255, 255, 255, 1);
+            border-radius: 50%;
+            position: absolute;
+         }
+
+         #infinite .track:nth-child(1) {
+            position: relative;
+            top: var(--track_distance);
+         }
+         #infinite .track:nth-child(2) {
+            position: relative;
+            top: calc(var(--track_distance) * -1);
+         }
+
+         #infinite .track .car {
+            width: var(--car_size_width);
+            height: var(--car_size_height);
+            margin-left: calc(var(--car_margin_left) * -1);
+            background: linear-gradient(
+                  transparent 70%,
+                  rgb(253, 173, 0) 70%,
+                  rgb(253, 173, 0) 85%,
+                  transparent 85%,
+                  transparent 100%
+               )
+               no-repeat center;
+            filter: drop-shadow(0 0 5px rgb(223, 119, 0));
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            transform-origin: center top;
+         }
+
+         .track-wrap .track:nth-child(1) .car {
+            transform: rotate(0deg);
+            animation: run1 var(--druation_time) infinite linear;
+         }
+
+         .track-wrap .track:nth-child(2) .car {
+            visibility: hidden;
+            transform: rotate(180deg);
+            animation: run2 var(--druation_time) var(--delay_time) infinite linear;
+         }
+
+         #infinite:hover * {
+            pointer-events: none;
+            animation-play-state: paused;
+         }
+
+         @keyframes run1 {
+            0% {
+               transform: rotate(0deg);
+            }
+
+            50% {
+               transform: rotate(360deg);
+               visibility: hidden;
+            }
+            100% {
+               visibility: hidden;
+            }
+         }
+
+         @keyframes run2 {
+            0% {
+               visibility: visible;
+               transform: rotate(180deg);
+            }
+
+            50% {
+               transform: rotate(-180deg);
+               visibility: hidden;
+            }
+            100% {
+               visibility: hidden;
+            }
+         }
+
+         @keyframes float_it {
+            50% {
+               left: 1vmax;
+            }
+         }
+
+         @keyframes float_it_2 {
+            50% {
+               top: 1vmax;
+            }
+         }
+
+         .word {
+            -webkit-writing-mode: vertical-lr;
+            writing-mode: vertical-rl;
+            position: fixed;
+            right: 0;
+            color: white;
+            font-size: 1.5vmax;
+            padding: 2rem;
+         }
+
+         .pic {
+            position: fixed;
+            left: -150px;
+            top: 0;
+            transform: scaleX(-1);
+         }
+
+         .pic img {
+            width: 130%;
+         }
+
+         @media (max-width: 500px) {
+            :root {
+               --track_size: 35vmax;
+            }
+            #infinite {
+               transform: rotate(0deg);
+            }
+
+            #infinite::after {
+               content: '';
+               width: 60vmax;
+               height: 4vmax;
+               border-radius: 50%;
+               background: radial-gradient(white 0%, transparent 100%);
+               filter: blur(1vmax);
+               opacity: 0.05;
+               position: absolute;
+               left: -10vmax;
+               top: 90%;
+               background: red;
+            }
+
+            #infinite .track-wrap {
+               position: relative;
+               top: 0;
+               animation: float_it_2 5s infinite alternate;
+            }
+
+            .word {
+               -webkit-writing-mode: vertical-lr;
+               writing-mode: vertical-rl;
+               position: fixed;
+               right: 0;
+               color: white;
+               font-size: 2.5vmax;
+               padding: 2rem;
+            }
+
+            .pic {
+               position: fixed;
+               left: -100px;
+               top: 100px;
+               transform: scaleX(-1);
+            }
+         }
+      </style>
+   </head>
+
+   <body>
+      <div class="pic">
+         <img src="srw.png" alt="" />
+      </div>
+      <div class="word">
+         人類の歴史は、常に戦争と共にあった。 しかし、人間は愚かではない。
+         多くの生命が失われる事となった戦争をきっかけに人類は自らの愚かさを悔やみ、戦いに繋がる技術を封印した。
+         だが、世界から争いが消える事はなかった。
+         多くの人間は生きる為に、または欲求を満たす為に、戦いたくなくとも諍いを起こす。
+         戦いに繋がる技術が封印された世界であっても、人口の増加に伴って発生する資源不足、国土不足などの問題から逃げる事は不可能であった。
+         また、地球圏は人類同士の問題以外にも、更なる問題に直面する事となる。
+         正体不明の敵『ＵＥ』や、巨人型異星人『ゼントラーディ』などが地球圏に襲来し始めたのである。
+         そして人類は、それらの問題を解決する為、再び戦争を始めた…。
+         時は流れ、人類はゼントラーディと共存の道を歩み始める。
+      </div>
+      <div id="infinite">
+         <div class="track-wrap">
+            <div class="track">
+               <div class="car"></div>
+            </div>
+            <div class="track">
+               <div class="car"></div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
