@@ -117,6 +117,7 @@
          }
 
          .track-wrap .track:nth-child(1) .car {
+            /* visibility: hidden; */
             transform: rotate(0deg);
             animation: run1 var(--druation_time) infinite linear;
          }
@@ -125,6 +126,26 @@
             visibility: hidden;
             transform: rotate(180deg);
             animation: run2 var(--druation_time) var(--delay_time) infinite linear;
+         }
+
+         .track-wrap .track:nth-child(1) .car::after {
+            content: '';
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right, rgba(253, 173, 0, 0.5) 0%, transparent 100%);
+            position: absolute;
+            left: 2.2vmax;
+            top: 6.95vmax;
+         }
+
+         .track-wrap .track:nth-child(2) .car::after {
+            content: '';
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to left, rgba(253, 173, 0, 0.5) 0%, transparent 100%);
+            position: absolute;
+            left: -2.2vmax;
+            top: 6.95vmax;
          }
 
          #infinite:hover * {
@@ -237,6 +258,26 @@
                left: -100px;
                top: 100px;
                transform: scaleX(-1);
+            }
+
+            .track-wrap .track:nth-child(1) .car::after {
+               content: '';
+               width: 100%;
+               height: 16%;
+               background: linear-gradient(to right, rgba(253, 173, 0, 0.5) 0%, transparent 100%);
+               position: absolute;
+               left: 4.2vmax;
+               top: 12.1vmax;
+            }
+
+            .track-wrap .track:nth-child(2) .car::after {
+               content: '';
+               width: 100%;
+               height: 16%;
+               background: linear-gradient(to left, rgba(253, 173, 0, 0.5) 0%, transparent 100%);
+               position: absolute;
+               left: -4.5vmax;
+               top: 12.2vmax;
             }
          }
       </style>
