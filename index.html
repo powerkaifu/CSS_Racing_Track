@@ -120,12 +120,14 @@
             /* visibility: hidden; */
             transform: rotate(0deg);
             animation: run1 var(--druation_time) infinite linear;
+            transition: none;
          }
 
          .track-wrap .track:nth-child(2) .car {
             visibility: hidden;
             transform: rotate(180deg);
             animation: run2 var(--druation_time) var(--delay_time) infinite linear;
+            transition: none;
          }
 
          .track-wrap .track:nth-child(1) .car::after {
@@ -258,6 +260,14 @@
                left: -100px;
                top: 100px;
                transform: scaleX(-1);
+            }
+
+            .track-wrap .track:nth-child(1) .car {
+               transition: none;
+            }
+
+            .track-wrap .track:nth-child(2) .car {
+               transition: none;
             }
 
             .track-wrap .track:nth-child(1) .car::after {
